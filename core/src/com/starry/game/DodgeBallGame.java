@@ -6,18 +6,21 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.starry.game.Chracter.PlayerCharacter;
 
 public class DodgeBallGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	Sprite sprite;
 	int x=0;
-	int y=0;
+
+	PlayerCharacter playerCharactercter;
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		sprite = new Sprite(img);
+		playerCharactercter = new PlayerCharacter();
 	}
 
 	private void update()
