@@ -1,5 +1,6 @@
 package com.starry.game;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -12,5 +13,6 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new DodgeBallGame(), config);
+
 	}
 }
