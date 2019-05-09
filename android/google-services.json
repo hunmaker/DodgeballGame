@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1001389185931",
+    "firebase_url": "https://dodgeballgame-2dde9.firebaseio.com",
+    "project_id": "dodgeballgame-2dde9",
+    "storage_bucket": "dodgeballgame-2dde9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001389185931:android:d648c0ffc78b2bfb",
+        "android_client_info": {
+          "package_name": "com.starry.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001389185931-th5fssuiu8htph81hfe812aftikefa55.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.starry.game",
+            "certificate_hash": "4047b999acf28279222bcfd0bc72b5503ed3c604"
+          }
+        },
+        {
+          "client_id": "1001389185931-5gfdbklcrens9gv3q5u69dov51m1s4ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2ToJPvHr3AqD43cHVu-tOq2lM05rcgNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001389185931-5gfdbklcrens9gv3q5u69dov51m1s4ul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
