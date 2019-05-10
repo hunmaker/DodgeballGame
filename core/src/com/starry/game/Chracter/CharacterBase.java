@@ -2,11 +2,11 @@ package com.starry.game.Chracter;
 
 public abstract class CharacterBase
 {
-    CharacterMovement characterMovement = new CharacterMovement();
-    CharacterSprite chracterSprite = new CharacterSprite();
+    public CharacterMovement characterMovement = new CharacterMovement();
+    public CharacterSprite chracterSprite = new CharacterSprite();
 
 
-    protected void Init()
+    public void Init()
     {
         InitCopmonents();
     }
@@ -14,6 +14,11 @@ public abstract class CharacterBase
     protected void InitCopmonents()
     {
         characterMovement.Init();
-        chracterSprite.Init();
+        chracterSprite.Init(characterMovement);
+    }
+
+    public void Dispose()
+    {
+        chracterSprite.Dispose();
     }
 }

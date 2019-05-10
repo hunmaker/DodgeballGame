@@ -5,13 +5,13 @@ import org.robovm.apple.uikit.UIApplication;
 
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
-import com.starry.game.DodgeBallGame;
+import com.starry.game.Scene.MainStageScene;
 
 public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new DodgeBallGame(), config);
+        return new IOSApplication(new MainStageScene(), config);
     }
 
     public static void main(String[] argv) {
