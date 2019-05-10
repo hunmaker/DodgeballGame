@@ -3,10 +3,13 @@ package com.starry.game.Scene;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -22,6 +25,9 @@ public class MainStageScene extends ApplicationAdapter {
 	Texture textureButtonLeft;
 	TouchPadButton btnLeft;
 	TouchPadButton btnRight;
+	Sprite backGround;
+	InputMultiplexer multiplexer = new InputMultiplexer();
+
 	@Override
 	public void create () {
 		stage = new Stage(new ScreenViewport());
@@ -29,18 +35,22 @@ public class MainStageScene extends ApplicationAdapter {
 		InitUI();
 		InitPlayers();
 		//TODO : 한번만 실행되어야 한다. 추후 보강.
-		Gdx.input.setInputProcessor(stage);
+		multiplexer.addProcessor(stage);
+		Gdx.input.setInputProcessor(multiplexer);
+
 		stage.addListener(InputManager.getInstance());
 	}
 
 	private void InitPlayers()
 	{
 		playerCharacter = new PlayerCharacter();
-		playerCharacter.Init();
+		playerCharacter.Init(multiplexer);
 	}
 
 	private void InitUI()
 	{
+		backGround = new Sprite(new Texture("background.jpg"));
+		backGround.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		textureButtonLeft =  new Texture("LeftButton.png");
 		Drawable drawable = new TextureRegionDrawable(new TextureRegion(textureButtonLeft));
 		btnLeft = new TouchPadButton(drawable);
@@ -95,11 +105,11 @@ public class MainStageScene extends ApplicationAdapter {
 		batch.begin();
 		//Start to draw
 
+		backGround.draw(batch);
 		//SpriteManager.getInstance().renderBatchs(): //보류
 		playerCharacter.chracterSprite.Render(batch);
 		btnLeft.draw(batch,1.0f);
 		btnRight.draw(batch,1.0f);
-
 		//End to draw
 		batch.end();
 		stage.act();
