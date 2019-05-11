@@ -7,16 +7,17 @@ import com.starry.game.SpriteManager.InputManager;
 
 public class CharacterMovement
 {
-    Vector2 position = new Vector2(0,0);
+    public Vector2 position = new Vector2(0,100);
     float moveSpeed = 250.0f;
 
     public boolean inputLeft = false;
     public boolean inputRight = false;
+    private CharacterSprite characterSprite;
 
 
-    protected void Init()
+    protected void Init(CharacterSprite characterSprite)
     {
-
+        this.characterSprite = characterSprite;
     }
 
     public void MoveLeft()
@@ -40,5 +41,10 @@ public class CharacterMovement
         {
             MoveRight();
         }
+    }
+
+    public Vector2 GetPosition()
+    {
+        return new Vector2(position.x + characterSprite.spriteCharacter.getWidth()/2,position.y + characterSprite.spriteCharacter.getHeight()/2);
     }
 }

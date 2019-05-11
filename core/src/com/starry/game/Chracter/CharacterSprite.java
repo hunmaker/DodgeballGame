@@ -14,6 +14,7 @@ public class CharacterSprite
     {
         textureChracter = new Texture("badlogic.jpg");
         spriteCharacter = new Sprite(textureChracter);
+        spriteCharacter.setOrigin(spriteCharacter.getWidth()/2,spriteCharacter.getHeight()/2);
         this.characterMovement = characterMovement;
     }
 

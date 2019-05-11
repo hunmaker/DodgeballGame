@@ -5,7 +5,7 @@ import com.badlogic.gdx.InputMultiplexer;
 public abstract class CharacterBase
 {
     public CharacterMovement characterMovement = new CharacterMovement();
-    public CharacterSprite chracterSprite = new CharacterSprite();
+    public CharacterSprite characterSprite = new CharacterSprite();
     public CharacterAttack characterAttack = new CharacterAttack();
 
     public void Init(InputMultiplexer multiplexer)
@@ -15,13 +15,13 @@ public abstract class CharacterBase
 
     protected void InitCopmonents(InputMultiplexer multiplexer)
     {
-        characterMovement.Init();
-        chracterSprite.Init(characterMovement);
-        characterAttack.Init(multiplexer);
+        characterMovement.Init(characterSprite);
+        characterSprite.Init(characterMovement);
+        characterAttack.Init(multiplexer,characterMovement);
     }
 
     public void Dispose()
     {
-        chracterSprite.Dispose();
+        characterSprite.Dispose();
     }
 }
