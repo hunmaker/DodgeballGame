@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -31,6 +32,8 @@ public class MainActivity extends Activity {
     private static final int RC_SIGN_IN = 10;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,8 +58,8 @@ public class MainActivity extends Activity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        SignInButton button = (SignInButton)findViewById(R.id.login_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        SignInButton googleLogin = (SignInButton)findViewById(R.id.login_button);
+        googleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -64,6 +67,41 @@ public class MainActivity extends Activity {
             }
         });
 
+        editTextEmail = (EditText)findViewById(R.id.editText_email);
+        editTextPassword = (EditText)findViewById(R.id.editText_password);
+
+        Button emailLogin = (Button)findViewById(R.id.email_login_button);
+        emailLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+            }
+        });
+    }
+
+
+    private void createUser(String email, String password){
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            Toast.makeText(MainActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                            //FirebaseUser user = mAuth.getCurrentUser();
+                            //updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
     }
 
     @Override
