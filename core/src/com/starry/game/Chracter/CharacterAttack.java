@@ -1,4 +1,4 @@
-package com.starry.game;
+package com.starry.game.Chracter;
 
 public class CharacterAttack
 {
