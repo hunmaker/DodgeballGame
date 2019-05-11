@@ -34,21 +34,14 @@ public class MainActivity extends Activity {
     private FirebaseAuth mAuth;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth = FirebaseAuth.getInstance(); //싱글톤 패턴
-
-        findViewById(R.id.button2).setOnClickListener(new Button.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            changeScene();
-        }
-    });
-
+        mAuth = FirebaseAuth.getInstance();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -77,10 +70,25 @@ public class MainActivity extends Activity {
                 createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
             }
         });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+
+                }
+            }
+        };
+
     }
 
 
-    private void createUser(String email, String password){
+    private void createUser(final String email, final String password){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -92,8 +100,28 @@ public class MainActivity extends Activity {
                             //FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                         } else {
+                            loginUser(email, password);
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    private void loginUser(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            Toast.makeText(MainActivity.this, "이메일 로그인 완료", Toast.LENGTH_SHORT).show();
+                            //FirebaseUser user = mAuth.getCurrentUser();
+                            //updateUI(user);
+                        } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
@@ -133,7 +161,7 @@ public class MainActivity extends Activity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(MainActivity.this, "FireBase 아이디 생성이 완료되었습니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Google 아이디 연동 성공", Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign in fails, display a message to the user.
 
@@ -144,11 +172,19 @@ public class MainActivity extends Activity {
                 });
     }
 
-
-    //씬전환
-    private void changeScene()
-    {
-        Intent intent = new Intent(this, AndroidLauncher.class);
-        startActivity(intent);
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+
 }
