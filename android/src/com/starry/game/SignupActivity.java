@@ -55,5 +55,13 @@ public class SignupActivity extends Activity {
             }
         });
 
+        findViewById(R.id.signupActivity_button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignupActivity.this, AndroidLauncher.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }
