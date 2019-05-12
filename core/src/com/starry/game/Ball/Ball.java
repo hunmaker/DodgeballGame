@@ -15,7 +15,7 @@ public class Ball
     float angle = 45;
     float rotation = 0;
     ///초당 돌릴 각도
-    float rotationAngle = 360;
+    float rotationAngle = 360*2;
     float rotationAngleacceleration = 0.9f;
     Sprite spriteBall;
     Texture textureBall;
@@ -41,6 +41,7 @@ public class Ball
         rotation += rotationAngle * Gdx.graphics.getDeltaTime();
         rotationAngle -= ((rotationAngle) * ((1.0f-rotationAngleacceleration) * Gdx.graphics.getDeltaTime()));
         //Gdx.app.log("gdx","rotation " + rotation);
+
         //Gdx.app.log("gdx","rotationAngle " + rotationAngle);
     }
 
@@ -54,5 +55,10 @@ public class Ball
     public void Dispose()
     {
         textureBall.dispose();
+    }
+
+    public boolean isExpired()
+    {
+        return speed <= 0;
     }
 }

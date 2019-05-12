@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.starry.game.Chracter.CharacterHealth;
 import com.starry.game.SpriteManager.SpriteManager;
 
 import java.util.ArrayList;
@@ -26,12 +27,20 @@ public class BallManager
 
     }
 
-    public void Update()
+    public void Update()//CharacterHealth player, CharacterHealth enemy
     {
+        List<Ball> expiredBallList = new ArrayList<Ball>();
         for(Ball target : ballList)
         {
+            boolean hited = false;
             target.Update();
+            if(target.isExpired() || hited)
+            {
+                target.Dispose();
+                expiredBallList.add(target);
+            }
         }
+        ballList.removeAll(expiredBallList);
     }
 
     public void Render(Batch batch)
@@ -42,14 +51,14 @@ public class BallManager
         }
     }
 
-    public void Shoot(Vector2 from, Vector2 to)
+    public void Shoot(Vector2 from, Vector2 to, Vector2 startAt)
     {
         from = from.cpy();
         to = to.cpy();
         Ball newBall = new Ball();
         float degree = GetDegree(from,to);
         Gdx.app.log("gdx","degree " + degree);
-        newBall.Init(from,degree);
+        newBall.Init(startAt,degree);
 
         ballList.add(newBall);
     }

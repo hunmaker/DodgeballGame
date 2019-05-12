@@ -16,7 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.starry.game.Ball.Ball;
 import com.starry.game.Ball.BallManager;
-import com.starry.game.Chracter.PlayerCharacter;
+import com.starry.game.Chracter.Base.EnemyChracter;
+import com.starry.game.Chracter.Base.PlayerCharacter;
 import com.starry.game.SpriteManager.InputManager;
 import com.starry.game.UI.TouchPadButton;
 
@@ -24,6 +25,7 @@ public class MainStageScene extends ApplicationAdapter {
 	private Stage stage;
 	SpriteBatch batch;
 	PlayerCharacter playerCharacter;
+	EnemyChracter enemyCharacter;
 	Texture textureButtonLeft;
 	TouchPadButton btnLeft;
 	TouchPadButton btnRight;
@@ -54,13 +56,16 @@ public class MainStageScene extends ApplicationAdapter {
 	private void InitPlayers()
 	{
 		playerCharacter = new PlayerCharacter();
-		playerCharacter.Init(multiplexer);
+		playerCharacter.Init(multiplexer, true, new Vector2(Gdx.graphics.getWidth()/2, 100));
+		enemyCharacter = new EnemyChracter();
+		enemyCharacter.Init(multiplexer,false, new Vector2(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()-100-256));
 	}
 
 	private void InitUI()
 	{
-		backGround = new Sprite(new Texture("background.jpg"));
-		backGround.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		backGround = new Sprite(new Texture("game_background_1.png"));
+		backGround.setSize(Gdx.graphics.getWidth()*3,Gdx.graphics.getHeight());
+		backGround.translateX(-500.0f);
 		textureButtonLeft =  new Texture("LeftButton.png");
 		Drawable drawable = new TextureRegionDrawable(new TextureRegion(textureButtonLeft));
 		btnLeft = new TouchPadButton(drawable);
@@ -107,7 +112,8 @@ public class MainStageScene extends ApplicationAdapter {
 	}
 	private void Update()
 	{
-		playerCharacter.characterMovement.Update();
+		playerCharacter.Update();
+		enemyCharacter.Update();
 		testBall.Update();
 		BallManager.getInstance().Update();
 	}
@@ -123,7 +129,8 @@ public class MainStageScene extends ApplicationAdapter {
 
 		backGround.draw(batch);
 		//SpriteManager.getInstance().renderBatchs(): //보류
-		playerCharacter.characterSprite.Render(batch);
+		playerCharacter.Render(batch);
+		enemyCharacter.Render(batch);
 		btnLeft.draw(batch,1.0f);
 		btnRight.draw(batch,1.0f);
 		testBall.Render(batch);

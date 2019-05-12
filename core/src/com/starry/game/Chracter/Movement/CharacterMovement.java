@@ -1,8 +1,10 @@
-package com.starry.game.Chracter;
+package com.starry.game.Chracter.Movement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.starry.game.Chracter.Base.CharacterBase;
+import com.starry.game.Chracter.CharacterSprite;
 import com.starry.game.SpriteManager.InputManager;
 
 public class CharacterMovement
@@ -13,11 +15,13 @@ public class CharacterMovement
     public boolean inputLeft = false;
     public boolean inputRight = false;
     private CharacterSprite characterSprite;
+    private CharacterBase.CharacterState characterState;
 
 
-    protected void Init(CharacterSprite characterSprite)
+    public void Init(CharacterSprite characterSprite, CharacterBase.CharacterState characterState)
     {
         this.characterSprite = characterSprite;
+        this.characterState = characterState;
     }
 
     public void MoveLeft()
