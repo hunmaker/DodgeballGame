@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,6 +38,7 @@ public class SignupActivity extends Activity {
 
                 if(email.getText().toString() == null || name.getText().toString() == null
                         || password.getText().toString() == null) {
+                    Toast.makeText(SignupActivity.this, "failed", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -45,23 +47,29 @@ public class SignupActivity extends Activity {
                         .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                String uid = task.getResult().getUser().getUid();
+                                //String uid = task.getResult().getUser().getUid();
+                                if(task.isSuccessful()){
+                                    Toast.makeText(SignupActivity.this, "회원가입 완료", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(SignupActivity.this, "다시 입력해주세요", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
-                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+
 
             }
         });
 
-        findViewById(R.id.signupActivity_button3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignupActivity.this, AndroidLauncher.class);
-                startActivity(intent);
-
-            }
-        });
+//        findViewById(R.id.signupActivity_button3).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SignupActivity.this, AndroidLauncher.class);
+//                startActivity(intent);
+//
+//            }
+//        });
     }
 }

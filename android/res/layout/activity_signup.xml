@@ -43,15 +43,15 @@
         android:layout_margin="8dp"
         android:text="회원가입" />
 
-    <Button
-        android:id="@+id/signupActivity_button3"
-        android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:layout_margin="8dp"
-        android:background="@color/Blue"
-        android:text="게임시작"
-        android:textColor="@color/ic_background_color"
-        android:textStyle="bold" />
+    <!--<Button-->
+        <!--android:id="@+id/signupActivity_button3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="47dp"-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:background="@color/Blue"-->
+        <!--android:text="게임시작"-->
+        <!--android:textColor="@color/ic_background_color"-->
+        <!--android:textStyle="bold" />-->
 
 
 </LinearLayout>
