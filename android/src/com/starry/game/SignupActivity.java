@@ -50,7 +50,7 @@ public class SignupActivity extends Activity {
                         });
                 Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                 startActivity(intent);
-                //finish();
+                finish();
 
             }
         });
