@@ -39,7 +39,7 @@ public class CharacterAttack
             //Gdx.app.log("gdx",String.format("tap Detected %f %f %d %d",x,Gdx.graphics.getHeight()-y,count,button));
             //Gdx.app.log("gdx",String.format("characterMovement Detected %f %f",characterMovement.position.x,characterMovement.position.y));
             //Gdx.app.log("gdx",String.format("Gdx.graphics.getHeight() %d",Gdx.graphics.getHeight()));
-            BallManager.getInstance().Shoot(characterMovement.GetPosition(),new Vector2(x,Gdx.graphics.getHeight()-y),characterMovement.GetPosition());
+            //BallManager.getInstance().Shoot(characterMovement.GetPosition(),new Vector2(x,Gdx.graphics.getHeight()-y),characterMovement.GetPosition());
             return false;
         }
 

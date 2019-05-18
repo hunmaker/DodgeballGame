@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends Activity {
 
@@ -47,7 +48,11 @@ public class SignupActivity extends Activity {
                         .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                //String uid = task.getResult().getUser().getUid();
+                                UserModel userModel = new UserModel();
+                                userModel.userName = name.getText().toString();
+                                String uid = task.getResult().getUser().getUid();
+                                FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
+
                                 if(task.isSuccessful()){
                                     Toast.makeText(SignupActivity.this, "회원가입 완료", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(SignupActivity.this, MainActivity.class);

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -71,8 +72,8 @@ public class MainStageScene extends ApplicationAdapter {
 		btnLeft = new TouchPadButton(drawable);
 		btnLeft.setTransform(true);
 		btnLeft.setPosition(0,0);
-		stage.addActor(btnLeft);
 
+		stage.addActor(btnLeft);
         btnRight = new TouchPadButton(drawable);
 		btnRight.setTransform(true);
 		btnRight.setOrigin(btnRight.getWidth()/2,btnRight.getHeight()/2);
@@ -126,7 +127,6 @@ public class MainStageScene extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		//Start to draw
-
 		backGround.draw(batch);
 		//SpriteManager.getInstance().renderBatchs(): //보류
 		playerCharacter.Render(batch);

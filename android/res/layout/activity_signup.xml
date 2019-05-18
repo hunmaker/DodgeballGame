@@ -29,6 +29,7 @@
             android:id="@+id/signupActivity_password"
             android:layout_margin="8dp"
             android:hint="패스워드"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
