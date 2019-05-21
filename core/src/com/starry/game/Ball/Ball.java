@@ -19,7 +19,7 @@ public class Ball
     float rotationAngleacceleration = 0.9f;
     Sprite spriteBall;
     Texture textureBall;
-    String strBall = "ball.png";
+    String strBall = "basket_ball.png";
     public void Init(Vector2 startAt, float angle)
     {
         pos = startAt;

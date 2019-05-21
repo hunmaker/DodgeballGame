@@ -34,8 +34,8 @@ public class MainActivity extends Activity {
 
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{6,16}$");
     private static final int RC_SIGN_IN = 10;
-    private GoogleSignInClient mGoogleSignInClient;
-    private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient; //구글 api 클라이언트
+    private FirebaseAuth mAuth; //firebase 인증 객체 생성
     private EditText editTextEmail;
     private EditText editTextPassword;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -47,10 +47,11 @@ public class MainActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance(); //firebase 인증 객체 선언(싱글톤 패턴)
 
 
-
+        // Google 로그인을 앱에 통합
+        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -154,6 +155,9 @@ public class MainActivity extends Activity {
         }
     }
 
+
+    // 사용자가 정상적으로 로그인한 후에 GoogleSignInAccount 개체에서 ID 토큰을 가져와서
+    // Firebase 사용자 인증 정보로 교환하고 Firebase 사용자 인증 정보를 사용해 Firebase에 인증
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
