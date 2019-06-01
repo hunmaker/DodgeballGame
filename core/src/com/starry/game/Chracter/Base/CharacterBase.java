@@ -2,6 +2,7 @@ package com.starry.game.Chracter.Base;
 
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.starry.game.Chracter.Attack.CharacterAttack;
 import com.starry.game.Chracter.CharacterSprite;

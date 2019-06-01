@@ -47,7 +47,7 @@
         android:id="@+id/signupActivity_button"
         android:layout_width="350dp"
         android:layout_height="47dp"
-        android:background="@color/Blue"
+        android:background="@drawable/button"
         android:textColor="@color/ic_background_color"
         android:textStyle="bold"
         android:layout_margin="16dp"

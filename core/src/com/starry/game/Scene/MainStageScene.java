@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -135,10 +138,12 @@ public class MainStageScene extends ApplicationAdapter {
 		btnRight.draw(batch,1.0f);
 		testBall.Render(batch);
 		BallManager.getInstance().Render(batch);
+
 		//End to draw
 		batch.end();
 		stage.act();
 		stage.draw();
+
 	}
 
 	//dispose : 메모리 해제

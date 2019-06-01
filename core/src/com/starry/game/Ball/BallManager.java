@@ -2,8 +2,10 @@ package com.starry.game.Ball;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.starry.game.Chracter.Base.EnemyChracter;
 import com.starry.game.Chracter.CharacterHealth;
 import com.starry.game.SpriteManager.SpriteManager;
 
@@ -34,6 +36,7 @@ public class BallManager
         {
             boolean hited = false;
             target.Update();
+
             if(target.isExpired() || hited)
             {
                 target.Dispose();
