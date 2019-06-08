@@ -12,16 +12,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.starry.game.AndroidLauncher;
 import com.starry.game.LoginActivity;
 import com.starry.game.MainActivity;
 import com.starry.game.R;
+import com.starry.game.model.UserModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
-
-    private TextView nameTextView;
-    private TextView emailTextView;
-    private FirebaseAuth auth;
 
     @Nullable
     @Override
@@ -38,24 +42,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        nameTextView = (TextView) view.findViewById(R.id.name_textView);
-        emailTextView = (TextView) view.findViewById(R.id.email_textView);
-
-        auth = FirebaseAuth.getInstance();
-        nameTextView.setText(auth.getCurrentUser().getDisplayName());
-        emailTextView.setText(auth.getCurrentUser().getEmail());
-
-        Button logOut = (Button) view.findViewById(R.id.logout_button);
-        logOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.signOut();
-                //LoginManager.getInstance().logOut();
-                //finish();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
 
         return view;
     }

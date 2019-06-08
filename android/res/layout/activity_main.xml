@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ic_background_color"
+            android:background="#B3FF0000"
             android:drawableTop="@drawable/baseline_home"
             android:text="Home" />
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ic_background_color"
+            android:background="#A6FF0000"
             android:drawableTop="@drawable/baseline_people"
             android:text="People" />
 
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/ic_background_color"
+            android:background="#99FF0000"
             android:drawableTop="@drawable/baseline_account"
             android:text="Account" />
     </LinearLayout>

@@ -78,7 +78,11 @@ public class SignupActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         UserModel userModel = new UserModel();
+                        userModel.userEmail = editTextEmail.getText().toString();
                         userModel.userName = editTextName.getText().toString();
+                        userModel.userPassword = editTextPassword.getText().toString();
+                        userModel.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
                         String uid = task.getResult().getUser().getUid();
                         FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
 

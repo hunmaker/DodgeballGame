@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.starry.game.fragment.AccountFragment;
 import com.starry.game.fragment.HomeFragment;
 import com.starry.game.fragment.PeopleFragment;
 
@@ -39,6 +40,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.button2:
                 getFragmentManager().beginTransaction().replace(R.id.framelayout, new PeopleFragment()).commit();
                 break;
+            case R.id.button3:
+                getFragmentManager().beginTransaction().replace(R.id.framelayout, new AccountFragment()).commit();
         }
     }
 
