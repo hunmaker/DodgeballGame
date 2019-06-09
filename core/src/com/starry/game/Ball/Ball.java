@@ -6,12 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.starry.game.Faction;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 public class Ball
@@ -30,17 +27,20 @@ public class Ball
 
     String[] strBall = {"dodge_ball.png", "soccer_ball.png", "basket_ball.png"};
     Random r = new Random();
-    int nRnd = r.nextInt(3);
-    String rndBall = strBall[nRnd];
+    int ballType = r.nextInt(3);
+    String rndBall = "";
 
     public BallType eBallType;
     public Faction eFaction;
 
-    public void Init(Vector2 startAt, float angle, Faction faction)
+    float reverse = 1.0f;
+
+    public void Init(Vector2 startAt, float angle, Faction faction) // ballType
     {
         pos = startAt;
         this.angle = angle;
         Gdx.app.log("gdx","angle " + angle);
+        rndBall = strBall[ballType];
         textureBall = new Texture(rndBall);
         spriteBall = new Sprite(textureBall);
         //spriteBall.setSize(100,100);
@@ -48,34 +48,71 @@ public class Ball
         eFaction = faction;
         Gdx.app.log("gdx"," MathUtils.cos(angle) " + MathUtils.cosDeg(angle));
         Gdx.app.log("gdx"," MathUtils.sin(angle) " + MathUtils.sinDeg(angle));
+
+        eBallType = getBallType();
+        switch (eBallType)
+        {
+            case DodgeBall:
+                speed *= 2;
+                damage = 5;
+                break;
+
+            case SoccerBall:
+                speed *= 1.5;
+                damage = 7;
+                break;
+
+            case BasketBall:
+                speed *= 1.0;
+                damage = 10;
+                break;
+        }
     }
 
     public void Update()
     {
         if(rndBall == strBall[0]) {
-            pos.x += MathUtils.cosDeg(angle) * 2 * speed * Gdx.graphics.getDeltaTime();
-            pos.y += MathUtils.sinDeg(angle) * 2 * speed * Gdx.graphics.getDeltaTime();
+            Move();
             speed += accelerationSpeed * Gdx.graphics.getDeltaTime();
             rotation += rotationAngle * Gdx.graphics.getDeltaTime();
             rotationAngle -= ((rotationAngle) * ((1.0f - rotationAngleacceleration) * Gdx.graphics.getDeltaTime()));
         }
         else if(rndBall == strBall[1]){
-            pos.x += MathUtils.cosDeg(angle) * 1.5 * speed * Gdx.graphics.getDeltaTime();
-            pos.y += MathUtils.sinDeg(angle) * 1.5 * speed * Gdx.graphics.getDeltaTime();
+            Move();
             speed += accelerationSpeed * Gdx.graphics.getDeltaTime();
             rotation += rotationAngle * Gdx.graphics.getDeltaTime();
             rotationAngle -= ((rotationAngle) * ((1.0f - rotationAngleacceleration) * Gdx.graphics.getDeltaTime()));
         }
         else {
-            pos.x += MathUtils.cosDeg(angle) * speed * Gdx.graphics.getDeltaTime();
-            pos.y += MathUtils.sinDeg(angle) * speed * Gdx.graphics.getDeltaTime();
+            Move();
             speed += accelerationSpeed * Gdx.graphics.getDeltaTime();
             rotation += rotationAngle * Gdx.graphics.getDeltaTime();
             rotationAngle -= ((rotationAngle) * ((1.0f - rotationAngleacceleration) * Gdx.graphics.getDeltaTime()));
         }
+
         //Gdx.app.log("gdx","rotation " + rotation);
 
         //Gdx.app.log("gdx","rotationAngle " + rotationAngle);
+
+        if(eBallType == BallType.BasketBall &&
+                pos.x > Gdx.graphics.getWidth()-spriteBall.getWidth() ||
+                pos.x <= 0)
+        {
+            reverse();
+            Move();
+        }
+
+    }
+
+    private void Move()
+    {
+        pos.x += MathUtils.cosDeg(angle) * speed * Gdx.graphics.getDeltaTime() * reverse;
+        pos.y += MathUtils.sinDeg(angle) * speed * Gdx.graphics.getDeltaTime();
+    }
+
+    private void reverse()
+    {
+        reverse *= -1.0f;
     }
 
     public void Render(Batch batch)
@@ -97,7 +134,7 @@ public class Ball
 
     public BallType getBallType()
     {
-        return BallType.valueOf(nRnd);
+        return BallType.valueOf(ballType);
     }
 
     public Circle getCircle()

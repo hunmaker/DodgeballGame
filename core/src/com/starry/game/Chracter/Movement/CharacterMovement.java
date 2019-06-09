@@ -10,13 +10,14 @@ import com.starry.game.SpriteManager.InputManager;
 public class CharacterMovement
 {
     public Vector2 position = new Vector2(0,300);
-    float moveSpeed = 250.0f;
+    float moveSpeed = 500.0f;
 
     public boolean inputLeft = false;
     public boolean inputRight = false;
-    private CharacterSprite characterSprite;
-    private CharacterBase.CharacterState characterState;
-    private boolean isDirectionRight = true;
+    protected CharacterSprite characterSprite;
+    protected CharacterBase.CharacterState characterState;
+    protected boolean isDirectionRight = true;
+    int skipCount = 0;
 
 
     public void Init(CharacterSprite characterSprite, CharacterBase.CharacterState characterState)
@@ -46,6 +47,19 @@ public class CharacterMovement
             isDirectionRight = true;
         }
 
+        Move();
+
+        if(position.x > Gdx.graphics.getWidth()-characterSprite.spriteCharacter.getWidth() ||
+                position.x <= 0)
+        {
+            isDirectionRight = !isDirectionRight;
+            Move();
+        }
+       // Gdx.app.log("gdx","LEFT is " +InputManager.getInstance().isKeyPressed[Input.Keys.LEFT]);
+
+    }
+    protected void Move()
+    {
         if(isDirectionRight)
         {
             MoveRight();
@@ -54,14 +68,6 @@ public class CharacterMovement
         {
             MoveLeft();
         }
-
-        if(position.x > Gdx.graphics.getWidth()-characterSprite.spriteCharacter.getWidth() ||
-                position.x <= 0)
-        {
-            isDirectionRight = !isDirectionRight;
-        }
-       // Gdx.app.log("gdx","LEFT is " +InputManager.getInstance().isKeyPressed[Input.Keys.LEFT]);
-
     }
 
     public Vector2 GetPosition()

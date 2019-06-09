@@ -15,14 +15,8 @@ public enum BallType {
         this.value = value;
     }
 
-    static {
-        for (BallType pageType : BallType.values()) {
-            map.put(pageType.value, pageType);
-        }
-    }
-
     public static BallType valueOf(int pageType) {
-        return (BallType) map.get(pageType);
+        return BallType.values()[pageType];
     }
 
     public int getValue() {

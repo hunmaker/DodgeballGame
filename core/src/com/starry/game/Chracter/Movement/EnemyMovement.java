@@ -1,6 +1,8 @@
 package com.starry.game.Chracter.Movement;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.starry.game.SpriteManager.InputManager;
 
 import java.util.Random;
 
@@ -11,6 +13,18 @@ public class EnemyMovement extends CharacterMovement
     @Override
     public void Update()
     {
+        super.Update();
+        /*
+        if(InputManager.getInstance().isKeyPressed[Input.Keys.LEFT] || InputManager.getInstance().isTouching[Input.Keys.LEFT])
+        {
+            isDirectionRight = false;
+        }
+        else if(InputManager.getInstance().isKeyPressed[Input.Keys.RIGHT]|| InputManager.getInstance().isTouching[Input.Keys.RIGHT])
+        {
+            isDirectionRight = true;
+        }
+        */
+
         /*
         //Do Nothing
         Random random = new Random();
