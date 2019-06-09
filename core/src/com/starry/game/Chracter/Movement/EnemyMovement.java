@@ -11,6 +11,7 @@ public class EnemyMovement extends CharacterMovement
     @Override
     public void Update()
     {
+        /*
         //Do Nothing
         Random random = new Random();
         if(rand < 0)
@@ -28,5 +29,6 @@ public class EnemyMovement extends CharacterMovement
             seed = 81;
         else if(position.x > Gdx.graphics.getWidth()-300)
             seed = 41;
+            */
     }
 }

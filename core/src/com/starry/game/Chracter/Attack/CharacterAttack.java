@@ -5,18 +5,21 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.starry.game.Ball.BallManager;
+import com.starry.game.Chracter.Base.CharacterBase;
 import com.starry.game.Chracter.Movement.CharacterMovement;
 
 public class CharacterAttack
 {
     AttackDetector attackDetector = new AttackDetector();
     CharacterMovement characterMovement;
+    private CharacterBase.CharacterState characterState;
     Vector2 panStartAt = new Vector2();
     Vector2 panEndAt = new Vector2();
     public boolean isPanning = false;
-    public void Init(InputMultiplexer multiplexer,CharacterMovement characterMovement)
+    public void Init(InputMultiplexer multiplexer, CharacterMovement characterMovement, CharacterBase.CharacterState characterState)
     {
         this.characterMovement = characterMovement;
+        this.characterState = characterState;
         SetupAttackProcessor(multiplexer);
     }
 
@@ -28,7 +31,7 @@ public class CharacterAttack
     public class AttackDetector implements GestureDetector.GestureListener
     {
         @Override
-        public boolean touchDown(float x, float y, int pointer, int butto17n) {
+        public boolean touchDown(float x, float y, int pointer, int button) {
 
             return false;
         }
@@ -77,7 +80,7 @@ public class CharacterAttack
             {
                 isPanning = false;
                 panEndAt = new Vector2(x,Gdx.graphics.getHeight()-y);
-                BallManager.getInstance().Shoot(panStartAt,panEndAt,characterMovement.GetPosition());
+                BallManager.getInstance().Shoot(panStartAt,panEndAt,characterMovement.GetPosition(),characterState.faction);
             }
             return false;
         }

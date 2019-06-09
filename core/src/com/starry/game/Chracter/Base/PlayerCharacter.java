@@ -1,7 +1,6 @@
 package com.starry.game.Chracter.Base;
 
 import com.badlogic.gdx.InputMultiplexer;
-import com.starry.game.Chracter.Attack.CharacterAttack;
 import com.starry.game.Chracter.Attack.PlayerAttack;
 import com.starry.game.Chracter.CharacterSprite;
 import com.starry.game.Chracter.Movement.PlayerMovement;
@@ -17,6 +16,10 @@ public class PlayerCharacter extends CharacterBase
 
         characterMovement.Init(characterSprite,characterState);
         characterSprite.Init(characterMovement);
-        characterAttack.Init(multiplexer,characterMovement);
+        characterAttack.Init(multiplexer,characterMovement, characterState);
+
+        super.InitCopmonents(multiplexer);
+
+        characterHealth.setMaxHp(100);
     }
 }

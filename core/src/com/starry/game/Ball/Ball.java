@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.starry.game.Faction;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +16,7 @@ import java.util.Random;
 
 public class Ball
 {
+    public int damage = 5;
     Vector2 pos = new Vector2();
     float speed = 600.0f;
     float accelerationSpeed = -25;
@@ -30,7 +33,10 @@ public class Ball
     int nRnd = r.nextInt(3);
     String rndBall = strBall[nRnd];
 
-    public void Init(Vector2 startAt, float angle)
+    public BallType eBallType;
+    public Faction eFaction;
+
+    public void Init(Vector2 startAt, float angle, Faction faction)
     {
         pos = startAt;
         this.angle = angle;
@@ -39,6 +45,7 @@ public class Ball
         spriteBall = new Sprite(textureBall);
         //spriteBall.setSize(100,100);
         //spriteBall.setOrigin(50,50);
+        eFaction = faction;
         Gdx.app.log("gdx"," MathUtils.cos(angle) " + MathUtils.cosDeg(angle));
         Gdx.app.log("gdx"," MathUtils.sin(angle) " + MathUtils.sinDeg(angle));
     }
@@ -87,4 +94,15 @@ public class Ball
     {
         return speed <= 0;
     }
+
+    public BallType getBallType()
+    {
+        return BallType.valueOf(nRnd);
+    }
+
+    public Circle getCircle()
+    {
+        return new Circle(pos.x+spriteBall.getWidth()/2,pos.y+spriteBall.getHeight()/2,spriteBall.getWidth()/2);
+    }
 }
+

@@ -49,18 +49,16 @@ public class MainStageScene extends ApplicationAdapter {
 
 		stage.addListener(InputManager.getInstance());
 	}
-	Ball testBall;
 
 	private void InitObjects()
 	{
-		testBall = new Ball();
-		testBall.Init(new Vector2(250,250),30);
+
 	}
 
 	private void InitPlayers()
 	{
 		playerCharacter = new PlayerCharacter();
-		playerCharacter.Init(multiplexer, true, new Vector2(Gdx.graphics.getWidth()/2, 100));
+		playerCharacter.Init(multiplexer, true, new Vector2(Gdx.graphics.getWidth()/2, 250));
 		enemyCharacter = new EnemyChracter();
 		enemyCharacter.Init(multiplexer,false, new Vector2(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()-100-256));
 	}
@@ -118,8 +116,7 @@ public class MainStageScene extends ApplicationAdapter {
 	{
 		playerCharacter.Update();
 		enemyCharacter.Update();
-		testBall.Update();
-		BallManager.getInstance().Update();
+		BallManager.getInstance().Update(playerCharacter.characterHealth,enemyCharacter.characterHealth);
 	}
 
 	//LibGDX RenderZone based by openGL
@@ -136,7 +133,6 @@ public class MainStageScene extends ApplicationAdapter {
 		enemyCharacter.Render(batch);
 		btnLeft.draw(batch,1.0f);
 		btnRight.draw(batch,1.0f);
-		testBall.Render(batch);
 		BallManager.getInstance().Render(batch);
 
 		//End to draw

@@ -29,4 +29,13 @@ public class CharacterSprite
     {
         textureChracter.dispose();
     }
+
+    public float getWidth()
+    {
+        return spriteCharacter.getWidth();
+    }
+    public float getHeight()
+    {
+        return spriteCharacter.getHeight();
+    }
 }
