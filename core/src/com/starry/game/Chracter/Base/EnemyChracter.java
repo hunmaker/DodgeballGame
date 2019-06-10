@@ -14,9 +14,10 @@ public class EnemyChracter extends CharacterBase
         characterMovement = new EnemyMovement();
         characterSprite = new CharacterSprite();
         characterAttack = new EnemyAttack();
+        characterHealth = new CharacterHealth();
 
         characterMovement.Init(characterSprite,characterState);
-        characterSprite.Init(characterMovement);
+        characterSprite.Init(characterMovement, characterHealth);
         characterAttack.Init(multiplexer,characterMovement, characterState);
 
         super.InitCopmonents(multiplexer);

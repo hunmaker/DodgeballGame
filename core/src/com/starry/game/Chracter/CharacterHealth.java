@@ -3,12 +3,13 @@ package com.starry.game.Chracter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.starry.game.Ball.Ball;
+import com.starry.game.Chracter.Base.CharacterBase;
 import com.starry.game.Chracter.Movement.CharacterMovement;
 
 public class CharacterHealth
 {
-    private int hp;
-    private int maxHp;
+    public int hp;
+    public int maxHp;
     private CharacterMovement characterMovement;
     private CharacterSprite chracterSprite;
 
@@ -33,5 +34,10 @@ public class CharacterHealth
     {
         hp -= target.damage;
         Gdx.app.log("gdx",String.format("Hited! %d/%d",hp,maxHp));
+    }
+
+    public float getHpRate()
+    {
+        return (float)hp/(float)maxHp;
     }
 }

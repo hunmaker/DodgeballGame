@@ -34,7 +34,6 @@ public abstract class CharacterBase
 
     protected void InitCopmonents(InputMultiplexer multiplexer)
     {
-        characterHealth = new CharacterHealth();
         characterHealth.Init(characterMovement,characterSprite);
     }
 
