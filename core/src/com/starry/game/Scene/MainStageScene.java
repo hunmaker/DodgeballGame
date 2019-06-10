@@ -56,7 +56,7 @@ public class MainStageScene extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(multiplexer);
 		gameOn = true;
 		MusicManager.getInstance().PlayMusic("data/BGM_GameScene.mp3");
-		MusicManager.getInstance().PlayEffect("data/StageStart.mp3");
+		MusicManager.getInstance().Caching("data/button.mp3");
 
 		stage.addListener(InputManager.getInstance());
 	}

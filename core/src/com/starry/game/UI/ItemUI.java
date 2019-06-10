@@ -37,7 +37,7 @@ public class ItemUI
             public void clicked(InputEvent event, float x, float y){
                 if(!itemShield)
                     return;
-                MusicManager.getInstance().PlayEffect("data/LOSE.mp3");
+                MusicManager.getInstance().PlayEffect("data/button.mp3");
                 itemShield = false;
                 playerCharacter2.useShield();
                 btnItemShield.setVisible(itemShield);

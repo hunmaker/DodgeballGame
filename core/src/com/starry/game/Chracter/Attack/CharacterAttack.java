@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.starry.game.Ball.BallManager;
 import com.starry.game.Chracter.Base.CharacterBase;
 import com.starry.game.Chracter.Movement.CharacterMovement;
+import com.starry.game.MusicManager;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -138,6 +139,7 @@ public class CharacterAttack
                 panEndAt = new Vector2(x,Gdx.graphics.getHeight()-y);
                 if(CanAttack())
                 {
+                    MusicManager.getInstance().PlayEffect("data/button.mp3");
                     BallManager.getInstance().Shoot(panStartAt, panEndAt, characterMovement.GetPosition(), characterState.faction, GetNextAttack());
                 }
             }

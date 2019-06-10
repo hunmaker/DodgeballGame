@@ -5,6 +5,8 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.starry.game.Ball.BallManager;
 
+import java.util.HashMap;
+
 public class MusicManager
 {
     Music mp3Music;
@@ -30,14 +32,15 @@ public class MusicManager
 
     }
 
+    HashMap<String, Sound> soundHashMap = new HashMap<String, Sound>();
 
     public void Caching(String strPath)
     {
-
+        soundHashMap.put(strPath, Gdx.audio.newSound(Gdx.files.internal(strPath)));
     }
+
     public void PlayEffect(String strPath)
     {
-        Sound newSound = Gdx.audio.newSound(Gdx.files.internal(strPath));
-        newSound.play();
+        soundHashMap.get(strPath).play();
     }
 }

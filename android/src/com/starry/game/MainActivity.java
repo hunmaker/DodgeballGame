@@ -11,7 +11,6 @@ import com.starry.game.fragment.PeopleFragment;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
-    MediaPlayer mPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +25,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
         findViewById(R.id.button3).setOnClickListener(this);
-        //mPlayer = MediaPlayer.create(getBaseContext(), R.raw.bgm_logo);
-        //mPlayer.start();
+        MediaPlayer mPlayer = MediaPlayer.create(getBaseContext(), R.raw.bgm_logo);
+        mPlayer.start();
     }
 
     public void onClick(View v){
