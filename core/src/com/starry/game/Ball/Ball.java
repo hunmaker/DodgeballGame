@@ -69,6 +69,11 @@ public class Ball
                 damage = 10;
                 break;
         }
+
+        if(faction == Faction.Enemy)
+        {
+            spriteBall.setColor(1.0f,0.6f,0.6f,1.0f);
+        }
     }
 
     public void Update()

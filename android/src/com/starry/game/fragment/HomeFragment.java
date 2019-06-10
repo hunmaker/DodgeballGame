@@ -17,10 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.starry.game.AndroidLauncher;
-import com.starry.game.Ball.BallManager;
 import com.starry.game.LoginActivity;
 import com.starry.game.MainActivity;
-import com.starry.game.ModeActivity;
 import com.starry.game.R;
 import com.starry.game.model.UserModel;
 
@@ -34,11 +32,12 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+
         Button startGame = (Button) view.findViewById(R.id.start_button);
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ModeActivity.class);
+                Intent intent = new Intent(getActivity(), AndroidLauncher.class);
                 startActivity(intent);
             }
         });

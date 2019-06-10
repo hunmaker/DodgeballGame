@@ -12,7 +12,6 @@ public class PlayerCharacter extends CharacterBase
     protected void InitCopmonents(InputMultiplexer multiplexer)
     {
         characterMovement = new PlayerMovement();
-
         characterSprite = new CharacterSprite();
         characterAttack = new PlayerAttack();
         characterHealth = new CharacterHealth();

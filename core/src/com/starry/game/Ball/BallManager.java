@@ -18,9 +18,8 @@ import java.util.List;
 public class BallManager
 {
 
-    private  List<Ball> ballList = new ArrayList<Ball>();
-
     public int hardLevel = 0;
+    private  List<Ball> ballList = new ArrayList<Ball>();
 
     private static BallManager instance;
     public static synchronized BallManager getInstance(){
@@ -70,6 +69,15 @@ public class BallManager
         {
             target.Render(batch);
         }
+    }
+
+    public void Dispose()
+    {
+        for(Ball target : ballList)
+        {
+            target.Dispose();
+        }
+        ballList.clear();
     }
 
     public void Shoot(Vector2 from, Vector2 to, Vector2 startAt, Faction faction, NextAttack nextAttack)

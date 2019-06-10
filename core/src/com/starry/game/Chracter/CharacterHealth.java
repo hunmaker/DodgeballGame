@@ -51,8 +51,8 @@ public class CharacterHealth
                                isInvincibil = false;
                            }
                        }
-                , 3.0f        //    (delay)
-                , 3.0f     //    (seconds)
+                , 4.0f        //    (delay)
+                , 4.0f     //    (seconds)
                 ,0
         );
     }

@@ -1,22 +1,17 @@
 package com.starry.game;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.starry.game.Ball.BallManager;
 import com.starry.game.fragment.AccountFragment;
 import com.starry.game.fragment.HomeFragment;
 import com.starry.game.fragment.PeopleFragment;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
-
+    MediaPlayer mPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +26,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
         findViewById(R.id.button3).setOnClickListener(this);
+        //mPlayer = MediaPlayer.create(getBaseContext(), R.raw.bgm_logo);
+        //mPlayer.start();
     }
 
     public void onClick(View v){

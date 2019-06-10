@@ -22,6 +22,7 @@ import com.starry.game.Ball.Ball;
 import com.starry.game.Ball.BallManager;
 import com.starry.game.Chracter.Base.EnemyChracter;
 import com.starry.game.Chracter.Base.PlayerCharacter;
+import com.starry.game.MusicManager;
 import com.starry.game.SpriteManager.InputManager;
 import com.starry.game.UI.ItemUI;
 import com.starry.game.UI.NextBallUI;
@@ -40,6 +41,7 @@ public class MainStageScene extends ApplicationAdapter {
 	NextBallUI nextBallUI = new NextBallUI();
 	ItemUI itemUI = new ItemUI();
 	ImageButton btnItemShield;
+	private  boolean gameOn = false;
 	@Override
 	public void create () {
 		stage = new Stage(new ScreenViewport());
@@ -47,12 +49,14 @@ public class MainStageScene extends ApplicationAdapter {
 		InitUI();
 		InitPlayers();
 		InitObjects();
-		nextBallUI.Init(playerCharacter.characterAttack, new Vector2(850,400));
-		itemUI.Init(new Vector2(Gdx.graphics.getWidth()/2,100),stage,playerCharacter);
+		nextBallUI.Init(playerCharacter.characterAttack, new Vector2(920,300));
+		itemUI.Init(new Vector2(Gdx.graphics.getWidth()/2,50),stage,playerCharacter);
 		//TODO : 한번만 실행되어야 한다. 추후 보강.
 		multiplexer.addProcessor(stage);
 		Gdx.input.setInputProcessor(multiplexer);
-
+		gameOn = true;
+		MusicManager.getInstance().PlayMusic("data/BGM_GameScene.mp3");
+		MusicManager.getInstance().PlayEffect("data/StageStart.mp3");
 
 		stage.addListener(InputManager.getInstance());
 	}
@@ -72,9 +76,9 @@ public class MainStageScene extends ApplicationAdapter {
 
 	private void InitUI()
 	{
-		backGround = new Sprite(new Texture("game_background_1.png"));
-		backGround.setSize(Gdx.graphics.getWidth()*3,Gdx.graphics.getHeight());
-		backGround.translateX(-500.0f);
+		backGround = new Sprite(new Texture("background.jpg"));
+		backGround.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		//backGround.setOriginCenter();
 		textureButtonLeft =  new Texture("LeftButton.png");
 		Drawable drawable = new TextureRegionDrawable(new TextureRegion(textureButtonLeft));
 		btnLeft = new TouchPadButton(drawable);
@@ -116,6 +120,8 @@ public class MainStageScene extends ApplicationAdapter {
 	}
 	private void UpdateLoop()
 	{
+		if(!gameOn)
+			return;
 		UpdateInputs();
 		Update();
 		ClearInputs();
@@ -125,6 +131,16 @@ public class MainStageScene extends ApplicationAdapter {
 		playerCharacter.Update();
 		enemyCharacter.Update();
 		BallManager.getInstance().Update(playerCharacter.characterHealth,enemyCharacter.characterHealth);
+	}
+
+	private  void Win()
+	{
+
+	}
+
+	private  void Lose()
+	{
+
 	}
 
 	//LibGDX RenderZone based by openGL
@@ -154,6 +170,8 @@ public class MainStageScene extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
+		BallManager.getInstance().Dispose();
 		playerCharacter.Dispose();
+		enemyCharacter.Dispose();
 	}
 }

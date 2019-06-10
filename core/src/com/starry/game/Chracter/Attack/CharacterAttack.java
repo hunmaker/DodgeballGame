@@ -15,7 +15,7 @@ public class CharacterAttack
 {
     AttackDetector attackDetector = new AttackDetector();
     CharacterMovement characterMovement;
-    private CharacterBase.CharacterState characterState;
+    protected CharacterBase.CharacterState characterState;
     Vector2 panStartAt = new Vector2();
     Vector2 panEndAt = new Vector2();
     public boolean isPanning = false;
@@ -29,6 +29,12 @@ public class CharacterAttack
         this.characterMovement = characterMovement;
         this.characterState = characterState;
         SetupAttackProcessor(multiplexer);
+        InitMember();
+    }
+
+    protected  void InitMember()
+    {
+
     }
 
     public void Update()
@@ -44,6 +50,12 @@ public class CharacterAttack
         {
             fBallTimer += Gdx.graphics.getDeltaTime();
         }
+        ProcessUpdate();
+    }
+
+    protected void ProcessUpdate()
+    {
+
     }
 
     protected  boolean CanCreateNextAttack()

@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.starry.game.Chracter.Attack.CharacterAttack;
 import com.starry.game.Chracter.Base.CharacterBase;
 import com.starry.game.Chracter.Base.PlayerCharacter;
+import com.starry.game.MusicManager;
 
 public class ItemUI
 {
@@ -27,13 +28,16 @@ public class ItemUI
         this.playerCharacter2 = playerCharacter;
         itemShield = true;
 
-        btnItemShield = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("shieldAura.png"))));
+        btnItemShield = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("shieldItem.png"))));
+        btnItemShield.setScale(0.7f);
         btnItemShield.setTransform(true);
         btnItemShield.setPosition(position.x,position.y);
         btnItemShield.addListener(new ClickListener() {
+
             public void clicked(InputEvent event, float x, float y){
                 if(!itemShield)
                     return;
+                MusicManager.getInstance().PlayEffect("data/LOSE.mp3");
                 itemShield = false;
                 playerCharacter2.useShield();
                 btnItemShield.setVisible(itemShield);

@@ -36,6 +36,7 @@ public class CharacterMovement
         this.position.x += moveSpeed * Gdx.graphics.getDeltaTime();
     }
 
+    protected static final float wallWidth = 80.0f;
     public void Update()
     {
         if(InputManager.getInstance().isKeyPressed[Input.Keys.LEFT] || InputManager.getInstance().isTouching[Input.Keys.LEFT])
@@ -49,8 +50,8 @@ public class CharacterMovement
 
         Move();
 
-        if(position.x > Gdx.graphics.getWidth()-characterSprite.spriteCharacter.getWidth() ||
-                position.x <= 0)
+        if(position.x > Gdx.graphics.getWidth()-characterSprite.spriteCharacter.getWidth()-wallWidth ||
+                position.x <= wallWidth)
         {
             isDirectionRight = !isDirectionRight;
             Move();
