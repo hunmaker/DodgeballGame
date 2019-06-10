@@ -10,6 +10,7 @@ import com.starry.game.Chracter.Attack.NextAttack;
 import com.starry.game.Chracter.Base.EnemyChracter;
 import com.starry.game.Chracter.CharacterHealth;
 import com.starry.game.Faction;
+import com.starry.game.MusicManager;
 import com.starry.game.SpriteManager.SpriteManager;
 
 import java.util.ArrayList;
@@ -45,13 +46,20 @@ public class BallManager
             {
                 hited =Intersector.overlaps(target.getCircle(),player.getRectangle());
                 if(hited)
+                {
                     player.Hited(target);
+                    if(!player.isInvincibil)
+                        MusicManager.getInstance().PlayEffect("data/hited.mp3");
+                }
             }
             else if(target.eFaction == Faction.Ally)
             {
                 hited =Intersector.overlaps(target.getCircle(),enemy.getRectangle());
                 if(hited)
+                {
                     enemy.Hited(target);
+                    MusicManager.getInstance().PlayEffect("data/hit.mp3");
+                }
             }
 
             if(target.isExpired() || hited)

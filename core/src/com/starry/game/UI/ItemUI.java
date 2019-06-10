@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.starry.game.Ball.BallManager;
 import com.starry.game.Chracter.Attack.CharacterAttack;
 import com.starry.game.Chracter.Base.CharacterBase;
 import com.starry.game.Chracter.Base.PlayerCharacter;
@@ -27,6 +28,9 @@ public class ItemUI
         this.position = position;
         this.playerCharacter2 = playerCharacter;
         itemShield = true;
+
+        if(BallManager.getInstance().hardLevel <= 0)
+            itemShield = false;
 
         btnItemShield = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("shieldItem.png"))));
         btnItemShield.setScale(0.7f);

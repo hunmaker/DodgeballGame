@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.starry.game.Chracter.Base.CharacterBase;
 import com.starry.game.Chracter.Movement.CharacterMovement;
+import com.starry.game.Faction;
 
 public class CharacterSprite
 {
@@ -18,9 +20,13 @@ public class CharacterSprite
 
     CharacterMovement characterMovement;
     CharacterHealth characterHealth;
-    public void Init(CharacterMovement characterMovement, CharacterHealth characterHealth)
+    CharacterBase.CharacterState characterState;
+    public void Init(CharacterMovement characterMovement, CharacterHealth characterHealth, CharacterBase.CharacterState characterState)
     {
-        textureChracter = new Texture("player_charactor.png");
+        if(characterState.faction == Faction.Ally)
+            textureChracter = new Texture("player_charactor.png");
+        else
+            textureChracter = new Texture("enemy_charactor.png");
         spriteShieldAura = new Sprite(new Texture("shieldAura.png"));
         spriteShieldAura.setScale(1.4f);
         spriteCharacter = new Sprite(textureChracter);
@@ -31,6 +37,7 @@ public class CharacterSprite
         spriteHp.setOrigin(0,0);
         this.characterMovement = characterMovement;
         this.characterHealth = characterHealth;
+        this.characterState = characterState;
 
     }
 

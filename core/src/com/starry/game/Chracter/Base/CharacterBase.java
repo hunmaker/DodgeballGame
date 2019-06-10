@@ -31,9 +31,9 @@ public abstract class CharacterBase
 
     public void Init(InputMultiplexer multiplexer, boolean isPlayer, Vector2 startAt)
     {
-        InitCopmonents(multiplexer);
         this.characterState.isPlayer = isPlayer;
         this.characterState.faction = isPlayer ? Faction.Ally : Faction.Enemy;
+        InitCopmonents(multiplexer);
         this.characterMovement.position = startAt.cpy();
     }
 

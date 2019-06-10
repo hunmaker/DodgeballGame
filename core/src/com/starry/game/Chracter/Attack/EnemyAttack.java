@@ -22,8 +22,21 @@ public class EnemyAttack extends CharacterAttack
     {
         fAttackTimer = 0;
         RerollAttackTime();
-        fBallTime = 1.0f;
-        nAttackTimeRand = 1500;
+        if(BallManager.getInstance().hardLevel == 0)
+        {
+            fBallTime = 1.0f;
+            nAttackTimeRand = 1500;
+        }
+        else if(BallManager.getInstance().hardLevel == 1)
+        {
+            fBallTime = 0.7f;
+            nAttackTimeRand = 1200;
+        }
+        else if(BallManager.getInstance().hardLevel == 2)
+        {
+            fBallTime = 0.5f;
+            nAttackTimeRand = 1000;
+        }
     }
 
     private void RerollAttackTime()

@@ -59,7 +59,12 @@ public class MainStageScene extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(multiplexer);
 		gameOn = true;
 		MusicManager.getInstance().PlayMusic("data/BGM_GameScene.mp3");
+
 		MusicManager.getInstance().Caching("data/button.mp3");
+		MusicManager.getInstance().Caching("data/hit.mp3");
+		MusicManager.getInstance().Caching("data/hited.mp3");
+		MusicManager.getInstance().Caching("data/LOSE.mp3");
+		MusicManager.getInstance().Caching("data/WIN.mp3");
 
 		stage.addListener(InputManager.getInstance());
 	}
@@ -147,7 +152,7 @@ public class MainStageScene extends ApplicationAdapter {
 		BallManager.getInstance().Update(playerCharacter.characterHealth,enemyCharacter.characterHealth);
 		if(playerCharacter.characterHealth.hp <= 0)
 			Lose();
-		else if(playerCharacter.characterHealth.hp <= 0)
+		else if(enemyCharacter.characterHealth.hp <= 0)
 			Win();
 	}
 
@@ -155,6 +160,7 @@ public class MainStageScene extends ApplicationAdapter {
 	{
 		gameOn = false;
 		isWin = true;
+		MusicManager.getInstance().PlayEffect("data/WIN.mp3");
 		Timer.schedule(new Timer.Task(){
 						   @Override
 						   public void run() {
@@ -171,6 +177,7 @@ public class MainStageScene extends ApplicationAdapter {
 	{
 		gameOn = false;
 		isWin = false;
+		MusicManager.getInstance().PlayEffect("data/LOSE.mp3");
 		Timer.schedule(new Timer.Task(){
 						   @Override
 						   public void run() {

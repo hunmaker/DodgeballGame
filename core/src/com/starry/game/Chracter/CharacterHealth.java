@@ -33,6 +33,8 @@ public class CharacterHealth
 
     public void Hited(Ball target)
     {
+        if(isInvincibil)
+            return;
         hp -= target.damage;
         Gdx.app.log("gdx",String.format("Hited! %d/%d",hp,maxHp));
     }

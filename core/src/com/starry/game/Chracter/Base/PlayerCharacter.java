@@ -17,7 +17,7 @@ public class PlayerCharacter extends CharacterBase
         characterHealth = new CharacterHealth();
 
         characterMovement.Init(characterSprite,characterState);
-        characterSprite.Init(characterMovement, characterHealth);
+        characterSprite.Init(characterMovement, characterHealth, characterState);
         characterAttack.Init(multiplexer,characterMovement, characterState);
 
         super.InitCopmonents(multiplexer);
