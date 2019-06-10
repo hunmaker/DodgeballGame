@@ -26,9 +26,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.button).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
         findViewById(R.id.button3).setOnClickListener(this);
-        MediaPlayer mPlayer = MediaPlayer.create(getBaseContext(), R.raw.bgm_logo);
+        mPlayer = MediaPlayer.create(getBaseContext(), R.raw.bgm_logo);
         mPlayer.start();
     }
+
+    protected void onRestart()
+    {
+        super.onRestart();
+        mPlayer = MediaPlayer.create(getBaseContext(), R.raw.bgm_logo);
+        mPlayer.start();
+    }
+
+    public void onPause()
+    {
+        super.onPause();
+        if(mPlayer != null)
+            mPlayer.stop();
+    }
+
 
     public void onClick(View v){
         switch(v.getId()){

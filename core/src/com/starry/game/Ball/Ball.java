@@ -102,8 +102,8 @@ public class Ball
         //Gdx.app.log("gdx","rotationAngle " + rotationAngle);
 
         if(eBallType == BallType.BasketBall &&
-                pos.x > Gdx.graphics.getWidth()-spriteBall.getWidth() ||
-                pos.x <= 0)
+                (pos.x > Gdx.graphics.getWidth()-spriteBall.getWidth() ||
+                pos.x <= 0))
         {
             reverse();
             Move();

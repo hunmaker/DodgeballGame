@@ -2,6 +2,7 @@ package com.starry.game;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import com.starry.game.Ball.BallManager;
 
 public class ModeActivity extends Activity {
+
+    private MediaPlayer mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,5 +48,21 @@ public class ModeActivity extends Activity {
             }
         });
 
+        mPlayer = MediaPlayer.create(getBaseContext(), R.raw.bgm_menu);
+        mPlayer.start();
+    }
+
+    protected void onRestart()
+    {
+        super.onRestart();
+        mPlayer = MediaPlayer.create(getBaseContext(), R.raw.bgm_menu);
+        mPlayer.start();
+    }
+
+    public void onPause()
+    {
+        super.onPause();
+        if(mPlayer != null)
+            mPlayer.stop();
     }
 }
