@@ -49,10 +49,10 @@ public class CharacterSprite
         spriteCharacter.draw(batch);
 
 
-        spriteBackGround.setPosition(characterMovement.position.x,characterMovement.position.y - spriteCharacter.getHeight());
+        spriteBackGround.setPosition(characterMovement.position.x,characterMovement.position.y + spriteCharacter.getHeight() + 10);
         spriteBackGround.draw(batch);
 
-        spriteHp.setPosition(characterMovement.position.x, characterMovement.position.y - spriteCharacter.getHeight());
+        spriteHp.setPosition(characterMovement.position.x, characterMovement.position.y + spriteCharacter.getHeight() + 10);
         spriteHp.setRegion(0,0,(int)(spriteHp.getWidth()*characterHealth.getHpRate()), (int)spriteHp.getHeight());
         spriteHp.setScale(characterHealth.getHpRate(), 1);
         spriteHp.draw(batch);
