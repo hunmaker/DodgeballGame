@@ -85,7 +85,7 @@ public class MainStageScene extends ApplicationAdapter {
 		backGroundLose = new Sprite(new Texture("GameOver.png"));
 		backGroundLose.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
-		backGroundWin = new Sprite(new Texture("background.jpg"));
+		backGroundWin = new Sprite(new Texture("GameClear.png"));
 		backGroundWin.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
 		//backGround.setOriginCenter();
