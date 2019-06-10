@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class MusicManager
 {
     Music mp3Music;
+    public PlatformService service;
     private static MusicManager instance;
     public static synchronized MusicManager getInstance(){
         if(instance == null){
@@ -17,6 +18,7 @@ public class MusicManager
         }
         return instance;
     }
+
 
     public void PlayMusic(String strPath)//"data/Logo_BGM.mp3"
     {

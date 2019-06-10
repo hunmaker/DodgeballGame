@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.starry.game.Ball.Ball;
 import com.starry.game.Ball.BallManager;
@@ -154,13 +155,32 @@ public class MainStageScene extends ApplicationAdapter {
 	{
 		gameOn = false;
 		isWin = true;
+		Timer.schedule(new Timer.Task(){
+						   @Override
+						   public void run() {
+							   MusicManager.getInstance().service.backToMenu();
+						   }
+					   }
+				, 3.0f        //    (delay)
+				, 3.0f     //    (seconds)
+				,0
+		);
 	}
 
 	private  void Lose()
 	{
 		gameOn = false;
 		isWin = false;
-
+		Timer.schedule(new Timer.Task(){
+						   @Override
+						   public void run() {
+							   MusicManager.getInstance().service.backToMenu();
+						   }
+					   }
+				, 3.0f        //    (delay)
+				, 3.0f     //    (seconds)
+				,0
+		);
 	}
 
 	//LibGDX RenderZone based by openGL

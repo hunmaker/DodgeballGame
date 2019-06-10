@@ -12,6 +12,15 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new MainStageScene(), config);
-
+		MusicManager.getInstance().service = new GdxService();
 	}
+
+	 class GdxService implements  PlatformService
+	 {
+		 @Override
+		 public void backToMenu()
+		 {
+			 finish();
+		 }
+	 }
 }
