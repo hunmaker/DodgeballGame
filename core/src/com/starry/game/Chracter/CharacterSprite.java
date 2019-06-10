@@ -20,12 +20,12 @@ public class CharacterSprite
     CharacterHealth characterHealth;
     public void Init(CharacterMovement characterMovement, CharacterHealth characterHealth)
     {
-        textureChracter = new Texture("badlogic.jpg");
+        textureChracter = new Texture("player_charactor.png");
         spriteShieldAura = new Sprite(new Texture("shieldAura.png"));
         spriteShieldAura.setScale(1.4f);
         spriteCharacter = new Sprite(textureChracter);
-        spriteBackGround = new Sprite(new Texture("badlogic.jpg"));
-        spriteHp = new Sprite(new Texture("badlogic.jpg"));
+        spriteBackGround = new Sprite(new Texture("black_bar.png"));
+        spriteHp = new Sprite(new Texture("red_bar.png"));
         spriteCharacter.setOrigin(spriteCharacter.getWidth()/2,spriteCharacter.getHeight()/2);
         spriteShieldAura.setOrigin(spriteShieldAura.getWidth()/2,spriteShieldAura.getHeight()/2);
         spriteHp.setOrigin(0,0);
@@ -49,10 +49,10 @@ public class CharacterSprite
         spriteCharacter.draw(batch);
 
 
-        spriteBackGround.setPosition(characterMovement.position.x,characterMovement.position.y - spriteCharacter.getHeight());
+        spriteBackGround.setPosition(characterMovement.position.x,characterMovement.position.y + spriteCharacter.getHeight() + 10);
         spriteBackGround.draw(batch);
 
-        spriteHp.setPosition(characterMovement.position.x, characterMovement.position.y - spriteCharacter.getHeight());
+        spriteHp.setPosition(characterMovement.position.x, characterMovement.position.y + spriteCharacter.getHeight() + 10);
         spriteHp.setRegion(0,0,(int)(spriteHp.getWidth()*characterHealth.getHpRate()), (int)spriteHp.getHeight());
         spriteHp.setScale(characterHealth.getHpRate(), 1);
         spriteHp.draw(batch);

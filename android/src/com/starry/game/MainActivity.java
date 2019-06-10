@@ -11,6 +11,7 @@ import com.starry.game.fragment.PeopleFragment;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
+    MediaPlayer mPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
