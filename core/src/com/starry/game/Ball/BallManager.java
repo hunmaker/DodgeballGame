@@ -18,8 +18,9 @@ import java.util.List;
 public class BallManager
 {
 
-    public int hardLevel = 0;
     private  List<Ball> ballList = new ArrayList<Ball>();
+
+    public int hardLevel = 0;
 
     private static BallManager instance;
     public static synchronized BallManager getInstance(){

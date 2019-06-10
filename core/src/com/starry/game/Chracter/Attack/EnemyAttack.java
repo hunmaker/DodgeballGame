@@ -9,5 +9,7 @@ public class EnemyAttack extends CharacterAttack
     protected void SetupAttackProcessor(InputMultiplexer multiplexer)
     {
         //Do Nothing
+
+
     }
 }
