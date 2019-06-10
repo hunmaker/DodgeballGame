@@ -41,6 +41,8 @@ public class MainStageScene extends ApplicationAdapter {
 	NextBallUI nextBallUI = new NextBallUI();
 	ItemUI itemUI = new ItemUI();
 	ImageButton btnItemShield;
+	Sprite backGroundLose;
+	Sprite backGroundWin;
 	private  boolean gameOn = false;
 	@Override
 	public void create () {
@@ -78,6 +80,14 @@ public class MainStageScene extends ApplicationAdapter {
 	{
 		backGround = new Sprite(new Texture("background.jpg"));
 		backGround.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+
+
+		backGroundLose = new Sprite(new Texture("GameOver.png"));
+		backGroundLose.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+
+		backGroundWin = new Sprite(new Texture("background.jpg"));
+		backGroundWin.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+
 		//backGround.setOriginCenter();
 		textureButtonLeft =  new Texture("LeftButton.png");
 		Drawable drawable = new TextureRegionDrawable(new TextureRegion(textureButtonLeft));
@@ -126,20 +136,30 @@ public class MainStageScene extends ApplicationAdapter {
 		Update();
 		ClearInputs();
 	}
+
+	boolean isWin = true;
+
 	private void Update()
 	{
 		playerCharacter.Update();
 		enemyCharacter.Update();
 		BallManager.getInstance().Update(playerCharacter.characterHealth,enemyCharacter.characterHealth);
+		if(playerCharacter.characterHealth.hp <= 0)
+			Lose();
+		else if(playerCharacter.characterHealth.hp <= 0)
+			Win();
 	}
 
 	private  void Win()
 	{
-
+		gameOn = false;
+		isWin = true;
 	}
 
 	private  void Lose()
 	{
+		gameOn = false;
+		isWin = false;
 
 	}
 
@@ -159,11 +179,23 @@ public class MainStageScene extends ApplicationAdapter {
 		btnRight.draw(batch,1.0f);
 		BallManager.getInstance().Render(batch);
 		nextBallUI.Render(batch);
+
+		if(!gameOn)
+		{
+			if(isWin)
+				backGroundWin.draw(batch);
+			else
+				backGroundLose.draw(batch);
+
+		}
 		//End to draw
 		batch.end();
-		stage.act();
-		stage.draw();
 
+		if(gameOn)
+		{
+			stage.act();
+			stage.draw();
+		}
 	}
 
 	//dispose : 메모리 해제
