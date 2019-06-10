@@ -18,6 +18,11 @@ public abstract class CharacterBase
     public CharacterHealth characterHealth;
     public CharacterState characterState = new CharacterState();
 
+    public void useShield()
+    {
+        characterHealth.StartShield();
+    }
+
     public class CharacterState
     {
         public boolean isPlayer = true;
@@ -40,6 +45,7 @@ public abstract class CharacterBase
     public void Update()
     {
         characterMovement.Update();
+        characterAttack.Update();
     }
 
     public void Render(SpriteBatch batch)

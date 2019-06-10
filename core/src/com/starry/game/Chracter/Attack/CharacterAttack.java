@@ -8,6 +8,9 @@ import com.starry.game.Ball.BallManager;
 import com.starry.game.Chracter.Base.CharacterBase;
 import com.starry.game.Chracter.Movement.CharacterMovement;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class CharacterAttack
 {
     AttackDetector attackDetector = new AttackDetector();
@@ -16,11 +19,52 @@ public class CharacterAttack
     Vector2 panStartAt = new Vector2();
     Vector2 panEndAt = new Vector2();
     public boolean isPanning = false;
+    public ArrayList<NextAttack> nextAttackList = new ArrayList();
+    public Random r = new Random();
+    float fBallTime = 1.0f;
+    float fBallTimer = 0.0f;
+    public int maxAttack = 5;
     public void Init(InputMultiplexer multiplexer, CharacterMovement characterMovement, CharacterBase.CharacterState characterState)
     {
         this.characterMovement = characterMovement;
         this.characterState = characterState;
         SetupAttackProcessor(multiplexer);
+    }
+
+    public void Update()
+    {
+        if(CanCreateNextAttack())
+        {
+            fBallTimer -= fBallTime;
+            CreateNextAttack();
+        }
+
+        //아직 꽊차지 않았다면 타이머 갱신
+        if(nextAttackList.size() < maxAttack)
+        {
+            fBallTimer += Gdx.graphics.getDeltaTime();
+        }
+    }
+
+    protected  boolean CanCreateNextAttack()
+    {
+        return  fBallTimer >= fBallTime && nextAttackList.size() < maxAttack;
+    }
+
+    public void CreateNextAttack()
+    {
+        nextAttackList.add(new NextAttack(r.nextInt(3)));
+        Gdx.app.log("gdx",String.format("CreateNextAttack : Count : %d", nextAttackList.size()));
+    }
+
+    public NextAttack GetNextAttack()
+    {
+       return nextAttackList.remove(0);
+    }
+
+    public boolean CanAttack()
+    {
+        return !nextAttackList.isEmpty();
     }
 
     protected void SetupAttackProcessor(InputMultiplexer multiplexer)
@@ -80,7 +124,10 @@ public class CharacterAttack
             {
                 isPanning = false;
                 panEndAt = new Vector2(x,Gdx.graphics.getHeight()-y);
-                BallManager.getInstance().Shoot(panStartAt,panEndAt,characterMovement.GetPosition(),characterState.faction);
+                if(CanAttack())
+                {
+                    BallManager.getInstance().Shoot(panStartAt, panEndAt, characterMovement.GetPosition(), characterState.faction, GetNextAttack());
+                }
             }
             return false;
         }

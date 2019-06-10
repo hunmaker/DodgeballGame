@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.starry.game.Chracter.Attack.NextAttack;
 import com.starry.game.Faction;
 
 import java.util.Random;
@@ -35,8 +36,9 @@ public class Ball
 
     float reverse = 1.0f;
 
-    public void Init(Vector2 startAt, float angle, Faction faction) // ballType
+    public void Init(Vector2 startAt, float angle, Faction faction, NextAttack nextAttack) // ballType
     {
+        ballType = nextAttack.eBallType.getValue();
         pos = startAt;
         this.angle = angle;
         Gdx.app.log("gdx","angle " + angle);

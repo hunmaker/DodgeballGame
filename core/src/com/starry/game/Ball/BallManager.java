@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.starry.game.Chracter.Attack.NextAttack;
 import com.starry.game.Chracter.Base.EnemyChracter;
 import com.starry.game.Chracter.CharacterHealth;
 import com.starry.game.Faction;
@@ -16,6 +17,8 @@ import java.util.List;
 
 public class BallManager
 {
+
+    public int hardLevel = 0;
     private  List<Ball> ballList = new ArrayList<Ball>();
 
     private static BallManager instance;
@@ -68,14 +71,14 @@ public class BallManager
         }
     }
 
-    public void Shoot(Vector2 from, Vector2 to, Vector2 startAt, Faction faction)
+    public void Shoot(Vector2 from, Vector2 to, Vector2 startAt, Faction faction, NextAttack nextAttack)
     {
         from = from.cpy();
         to = to.cpy();
         Ball newBall = new Ball();
         float degree = GetDegree(from,to);
         Gdx.app.log("gdx","degree " + degree);
-        newBall.Init(startAt,degree,faction);
+        newBall.Init(startAt,degree,faction, nextAttack);
 
         ballList.add(newBall);
     }

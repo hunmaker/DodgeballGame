@@ -20,6 +20,6 @@ public enum BallType {
     }
 
     public int getValue() {
-        return value;
+        return value-1;
     }
 }

@@ -23,6 +23,8 @@ import com.starry.game.Ball.BallManager;
 import com.starry.game.Chracter.Base.EnemyChracter;
 import com.starry.game.Chracter.Base.PlayerCharacter;
 import com.starry.game.SpriteManager.InputManager;
+import com.starry.game.UI.ItemUI;
+import com.starry.game.UI.NextBallUI;
 import com.starry.game.UI.TouchPadButton;
 
 public class MainStageScene extends ApplicationAdapter {
@@ -35,7 +37,9 @@ public class MainStageScene extends ApplicationAdapter {
 	TouchPadButton btnRight;
 	Sprite backGround;
 	InputMultiplexer multiplexer = new InputMultiplexer();
-
+	NextBallUI nextBallUI = new NextBallUI();
+	ItemUI itemUI = new ItemUI();
+	ImageButton btnItemShield;
 	@Override
 	public void create () {
 		stage = new Stage(new ScreenViewport());
@@ -43,9 +47,12 @@ public class MainStageScene extends ApplicationAdapter {
 		InitUI();
 		InitPlayers();
 		InitObjects();
+		nextBallUI.Init(playerCharacter.characterAttack, new Vector2(850,400));
+		itemUI.Init(new Vector2(Gdx.graphics.getWidth()/2,100),stage,playerCharacter);
 		//TODO : 한번만 실행되어야 한다. 추후 보강.
 		multiplexer.addProcessor(stage);
 		Gdx.input.setInputProcessor(multiplexer);
+
 
 		stage.addListener(InputManager.getInstance());
 	}
@@ -83,6 +90,7 @@ public class MainStageScene extends ApplicationAdapter {
 		Gdx.app.log("gdx", "screen width :" + Gdx.graphics.getWidth());
 		Gdx.app.log("gdx", "btn width :" + btnRight.getWidth());
 		stage.addActor(btnRight);
+
 	}
 
 	private void UpdateInputs()
@@ -134,7 +142,7 @@ public class MainStageScene extends ApplicationAdapter {
 		btnLeft.draw(batch,1.0f);
 		btnRight.draw(batch,1.0f);
 		BallManager.getInstance().Render(batch);
-
+		nextBallUI.Render(batch);
 		//End to draw
 		batch.end();
 		stage.act();
